@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ungodly Hours</title>
+<style>
+:root{--ink:#aab4ff;--amber:#ffb067;--pill:#0b0720;--edge:#2c2670;--txt:#e9eaff}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:#0a0410}
+body{min-height:100vh;font-family:"Quicksand","Nunito","Varela Round",system-ui,sans-serif;color:var(--txt);
+background:linear-gradient(180deg,#0a0410 0%,#170a2e 45%,#1c1558 100%) fixed;overflow-x:hidden;
+padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+#stars{position:fixed;inset:0;pointer-events:none}
+#stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;opacity:.8}
+svg.mtn{position:fixed;left:0;right:0;bottom:0;width:100%;height:30vh;pointer-events:none;z-index:0}
+main{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:0 20px 40px}
+h1{margin:40px 0 0;width:min(84vw,400px);line-height:0;filter:drop-shadow(0 0 14px rgba(150,140,255,.35))}
+.logo{width:100%;height:auto;display:block}
+#panel{margin-top:auto;margin-bottom:auto;width:100%;display:flex;flex-direction:column;align-items:center;gap:16px;padding-top:40px}
+body.res #panel{margin-top:36px;margin-bottom:0}
+.lead{font-size:28px;margin:0 0 4px}
+body.res .lead{display:none}
+.seg{display:flex;padding:4px;border:1.5px solid var(--edge);border-radius:40px;background:#0f0a26}
+.seg button{font:inherit;font-size:22px;padding:12px 26px;border-radius:30px;border:1.5px solid transparent;background:none;color:#6e72c4}
+.seg button.on{background:#1f1a5a;border-color:#4a44a0;color:var(--txt)}
+.time{display:flex;gap:14px}
+.pill{position:relative;display:flex;align-items:center;justify-content:center;height:106px;border:1.5px solid var(--edge);border-radius:60px;background:var(--pill);padding:0 22px}
+.pill select{appearance:none;-webkit-appearance:none;background:none;border:0;outline:0;font:inherit;font-weight:700;font-size:56px;color:inherit;text-align:center;text-align-last:center;padding:0 6px;width:auto}
+.pill select option{font-size:20px;color:#222}
+.pill .c{font-size:48px;font-weight:700;padding:0 2px 6px}
+.time{color:#fff}
+body.wake .time{color:var(--amber)}
+.buf{display:flex;align-items:center;gap:10px;font-size:21px;color:#8f95e6;border:1.5px solid var(--edge);border-radius:40px;padding:8px 10px 8px 22px;background:#0f0a26}
+.buf select{appearance:none;-webkit-appearance:none;font:inherit;font-weight:700;font-size:21px;color:var(--txt);background:#1f1a5a;border:1.5px solid #4a44a0;border-radius:30px;padding:8px 16px;text-align:center;text-align-last:center}
+.buf select option{color:#222}
+.go{font:inherit;font-weight:700;font-size:28px;color:#fff;background:var(--pill);border:1.5px solid var(--edge);border-radius:50px;padding:20px 32px}
+body.wake .go.main{color:var(--amber)}
+.go.alt{font-size:27px;color:#8f95e6;font-weight:600}
+.go:active,.seg button:active{filter:brightness(1.4)}
+#results{display:none;width:100%;max-width:480px;margin-top:28px;text-align:center}
+body.res #results{display:block}
+body.res .main,body.res #now{display:none}
+#results h2{font-size:34px;color:var(--amber);margin:0 0 20px;font-weight:700}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.card{background:#0e0724e6;border-radius:26px;padding:22px 8px 26px}
+.card svg{width:34px;height:34px;display:block;margin:0 auto 10px}
+.card .t{font-size:40px;font-weight:700;color:#fff;line-height:1.15}
+.card .n{font-size:26px;font-weight:600;margin-top:6px}
+.card .h{font-size:26px;font-weight:600;opacity:.9}
+.card.mid .t,.card.mid .n,.card.mid .h{opacity:.8}
+.card.bad .t,.card.bad .n,.card.bad .h{opacity:.55}
+.foot{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:26px}
+@media (max-width:360px){.pill select{font-size:46px}.card .t{font-size:32px}}
+</style>
+</head>
+<body class="wake">
+<div id="stars"></div>
+<svg class="mtn" viewBox="0 0 720 300" preserveAspectRatio="none"><path d="M-10 300 L-10 160 L60 220 L260 40 L360 170 L560 5 L720 150 L730 300Z" fill="#07041a" opacity=".92"/></svg>
+<main>
+<h1><svg class="logo" viewBox="-4 -709 7569 951" role="img" aria-label="Ungodly Hours"><path fill="url(#lg)" d="M363 -249C369 -266 371 -283 371 -301C371 -360 346 -424 315 -479C296 -512 280 -549 280 -586C280 -624 324 -653 356 -673L333 -689C254 -643 156 -550 156 -504C156 -447 233 -366 259 -304C268 -283 274 -264 274 -244C274 -160 203 -130 122 -117L16 -8L34 12C80 -30 106 -38 124 -38C220 -38 316 34 418 34C432 34 454 32 473 21L600 -84L671 39L871 -72L867 -92C846 -84 817 -74 803 -74C746 -74 720 -184 719 -198C715 -259 714 -319 714 -380C714 -467 705 -589 760 -646L785 -670L768 -685C709 -650 648 -617 581 -593C589 -511 594 -429 594 -347C594 -280 591 -213 587 -146C585 -107 535 -63 487 -63C410 -63 303 -118 238 -128C268 -146 325 -207 363 -249ZM1065 -129C1064 -204 1064 -348 1064 -350L1126 -381C1160 -372 1203 -360 1234 -345C1236 -303 1238 -261 1238 -219C1238 -167 1235 -116 1226 -68C1254 -38 1284 -6 1306 26C1355 -14 1407 -56 1459 -88L1451 -104C1435 -95 1410 -83 1400 -80L1353 -132C1352 -155 1352 -178 1352 -200C1352 -271 1355 -341 1363 -411C1312 -430 1257 -452 1216 -474C1168 -438 1118 -405 1065 -376C1065 -377 1065 -408 1066 -424C1039 -436 1010 -456 984 -474L854 -381L872 -367L915 -388L939 -366C942 -307 946 -232 946 -168C946 -117 944 -73 936 -48C965 -25 990 2 1014 28L1126 -62ZM1887 -83C1901 -32 1919 37 1919 74C1919 123 1896 125 1866 125C1827 125 1744 80 1689 50ZM1521 138 1539 153 1577 129C1645 171 1727 208 1813 208C1823 208 1834 207 1844 206C1918 150 1985 88 2046 22C2033 -63 2001 -146 2001 -232C2001 -307 2003 -393 2037 -461L2024 -465L1938 -426C1900 -432 1851 -454 1810 -473C1742 -441 1677 -404 1613 -366C1597 -306 1591 -246 1591 -185C1591 -147 1594 -108 1597 -70L1690 23ZM1888 -111 1810 -62C1775 -78 1745 -107 1720 -132C1716 -166 1714 -200 1714 -234C1714 -288 1720 -348 1731 -400C1773 -378 1836 -351 1893 -343C1890 -288 1888 -233 1888 -177ZM2354 34C2437 0 2517 -41 2590 -89C2614 -168 2615 -256 2615 -337C2615 -361 2615 -386 2614 -410C2551 -426 2490 -449 2436 -482C2369 -440 2300 -400 2229 -362C2215 -283 2207 -204 2207 -124C2207 -104 2207 -85 2208 -65C2253 -28 2302 4 2354 34ZM2477 -55C2422 -69 2374 -98 2332 -131C2328 -167 2325 -203 2325 -238C2325 -318 2341 -372 2356 -397C2402 -378 2450 -361 2501 -354C2503 -327 2505 -299 2505 -272C2505 -199 2496 -126 2477 -55ZM2966 -459C2912 -424 2848 -378 2801 -335C2796 -269 2794 -209 2794 -163C2794 -130 2795 -103 2798 -85C2848 -42 2904 -4 2963 29C3036 -15 3127 -68 3176 -108C3206 -192 3220 -280 3220 -368C3220 -403 3218 -439 3213 -475C3158 -512 3090 -552 3032 -583C2985 -608 2940 -630 2886 -632C2825 -610 2764 -587 2708 -557L2722 -538C2749 -549 2782 -558 2812 -558C2908 -558 3019 -473 3097 -411C3100 -377 3102 -343 3102 -309C3102 -175 3076 -106 3052 -66C3002 -86 2956 -114 2917 -148C2914 -183 2912 -219 2912 -254C2912 -301 2913 -341 2923 -389C2942 -408 2968 -434 2988 -449ZM3613 -86 3604 -101C3587 -92 3564 -83 3555 -83L3529 -112C3522 -179 3520 -254 3520 -330C3520 -437 3505 -578 3565 -638C3574 -647 3590 -663 3604 -673L3593 -682C3540 -656 3487 -625 3440 -593L3420 -665L3401 -661C3405 -551 3409 -425 3409 -312C3409 -217 3406 -128 3398 -55C3398 -54 3440 -2 3462 24ZM4147 -412C4098 -431 4051 -453 4006 -478L3866 -385V-426C3840 -443 3799 -478 3799 -507C3799 -524 3806 -538 3816 -553L3798 -559C3747 -510 3695 -463 3695 -432C3695 -406 3744 -376 3744 -355C3744 -256 3744 -117 3726 -60C3753 -39 3795 8 3821 39L3916 -53L3872 -108C3864 -117 3864 -130 3864 -141V-356L3923 -381C3958 -372 3990 -356 4019 -338C4023 -286 4026 -234 4026 -182C4026 -73 4027 81 3945 149C3936 156 3887 181 3854 197L3884 222C3965 182 4026 128 4081 66C4109 34 4138 1 4138 -39C4145 -119 4150 -201 4150 -289C4150 -329 4149 -370 4147 -412ZM4908 -127C4929 -147 4936 -178 4936 -205C4936 -237 4914 -291 4890 -331C4968 -391 4992 -388 5038 -388C5169 -388 5181 -255 5181 -178C5181 -59 5183 69 5092 69C5063 69 5037 40 5027 16L5011 17L4952 87C4977 110 5011 127 5049 127C5090 127 5245 12 5256 12C5292 -69 5307 -155 5307 -242C5307 -302 5303 -407 5249 -434C5211 -456 5127 -479 5063 -479C5001 -445 4933 -400 4876 -357C4844 -406 4808 -471 4808 -525C4808 -550 4825 -572 4845 -590C4891 -561 4943 -534 5002 -534C5018 -534 5034 -537 5049 -541C5099 -572 5153 -620 5188 -652L5174 -670C5151 -653 5098 -619 5063 -619C5019 -619 4972 -654 4938 -684C4845 -626 4709 -529 4709 -445C4709 -329 4842 -222 4842 -140C4842 -116 4830 -96 4813 -76C4790 -103 4756 -132 4714 -132C4670 -132 4601 -62 4554 -15L4570 3C4579 -6 4613 -36 4646 -36C4680 -36 4716 -6 4742 18ZM5659 34C5742 0 5822 -41 5895 -89C5919 -168 5920 -256 5920 -337C5920 -361 5920 -386 5919 -410C5856 -426 5795 -449 5741 -482C5674 -440 5605 -400 5534 -362C5520 -283 5512 -204 5512 -124C5512 -104 5512 -85 5513 -65C5558 -28 5607 4 5659 34ZM5782 -55C5727 -69 5679 -98 5637 -131C5633 -167 5630 -203 5630 -238C5630 -318 5646 -372 5661 -397C5707 -378 5755 -361 5806 -354C5808 -327 5810 -299 5810 -272C5810 -199 5801 -126 5782 -55ZM6384 -424C6388 -312 6388 -201 6388 -98L6321 -62C6283 -78 6237 -97 6204 -104C6235 -146 6239 -208 6239 -259C6239 -310 6237 -362 6235 -414C6209 -433 6160 -470 6157 -473L6023 -379L6037 -365L6072 -384C6091 -379 6103 -368 6114 -356C6124 -312 6133 -269 6133 -224C6133 -163 6117 -93 6081 -42C6127 -25 6190 3 6232 35C6270 0 6333 -48 6395 -73L6459 32L6618 -88L6612 -101L6562 -81C6560 -80 6552 -79 6550 -79C6522 -79 6502 -154 6502 -158C6502 -259 6504 -359 6519 -459L6505 -468ZM6904 -334C6919 -321 6927 -316 6942 -316C6948 -316 6951 -318 6954 -320C6990 -343 7028 -368 7056 -394V-407C7045 -403 7029 -398 7020 -398C6990 -398 6966 -443 6946 -471L6839 -380V-411L6754 -473L6615 -382L6626 -368L6670 -380C6688 -369 6702 -355 6717 -340C6720 -296 6721 -266 6721 -222C6721 -187 6720 -119 6708 -76C6752 -44 6795 -11 6833 26L7006 -80V-101L6916 -70C6847 -124 6839 -123 6838 -147C6836 -176 6836 -206 6836 -236C6836 -286 6838 -341 6840 -359C6844 -363 6853 -370 6858 -373ZM7545 -442 7534 -461C7510 -445 7474 -428 7450 -428C7430 -428 7410 -432 7393 -442L7327 -480L7140 -377V-238C7140 -217 7167 -183 7186 -167C7248 -198 7291 -225 7325 -225C7349 -225 7367 -210 7382 -195C7385 -167 7387 -139 7387 -112C7387 -88 7386 -61 7382 -38C7333 -76 7256 -131 7217 -131C7199 -131 7182 -129 7165 -125L7039 -26L7050 -10C7075 -26 7104 -41 7136 -41C7192 -41 7249 1 7290 35C7352 4 7419 -21 7486 -44C7500 -83 7505 -124 7505 -165C7505 -199 7501 -233 7496 -266C7477 -280 7456 -292 7434 -302C7383 -279 7330 -256 7279 -239C7260 -269 7251 -306 7251 -339C7251 -362 7255 -385 7260 -408C7302 -379 7358 -342 7402 -342Z"/><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c9d0ff"/><stop offset="1" stop-color="#ffb067"/></linearGradient></defs></svg></h1>
+<section id="panel">
+<p class="lead">I want to…</p>
+<div class="seg" role="tablist">
+<button id="mBed" type="button">go to bed at</button>
+<button id="mWake" type="button">wake up at</button>
+</div>
+<div class="time">
+<label class="pill"><select id="hh" aria-label="Hour"></select><span class="c">:</span><select id="mm" aria-label="Minutes"></select></label>
+<label class="pill"><select id="ap" aria-label="AM or PM"><option>AM</option><option>PM</option></select></label>
+</div>
+<label class="buf">fall-asleep buffer <select id="bf" aria-label="Fall-asleep buffer"></select></label>
+<button id="calc" class="go main" type="button">Calculate &nbsp;→</button>
+<button id="now" class="go alt" type="button">Sleep now 😴</button>
+</section>
+<section id="results">
+<h2 id="head"></h2>
+<div class="grid" id="grid"></div>
+<div class="foot"><button id="now2" class="go alt" type="button">Sleep now 😴</button></div>
+</section>
+</main>
+<script>
+(function(){
+var CYCLE=90, FALL=0, $=function(i){return document.getElementById(i)};
+var mode='bed', bf=$('bf'), hh=$('hh'), mm=$('mm'), ap=$('ap');
+
+function pad(n){return (n<10?'0':'')+n}
+function fmt(min){
+  min=((min%1440)+1440)%1440;
+  var h24=Math.floor(min/60), m=min%60;
+  return ((h24%12)||12)+':'+pad(m)+' '+(h24>=12?'PM':'AM');
+}
+function toMin(h,m,p){return (h%12)*60+m+(p==='PM'?720:0)}
+function hrs(n){var x=n*1.5;return (x%1===0?x:x.toFixed(1))+' hr'}
+// Pure calc: 6..1 cycles, best first.
+function calc(m,t){
+  var out=[];
+  for(var n=6;n>=1;n--) out.push({n:n,time:fmt(m==='wake'?t-n*CYCLE-FALL:t+FALL+n*CYCLE),dur:hrs(n)});
+  return out;
+}
+window.__calc=calc; window.__fmt=fmt;
+
+var FACE={
+ good:'<svg viewBox="0 0 24 24" fill="none" stroke="#2fd36b" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="8.8" cy="9.5" r=".9" fill="#2fd36b"/><circle cx="15.2" cy="9.5" r=".9" fill="#2fd36b"/><path d="M7.5 14c1.2 2.4 7.8 2.4 9 0"/></svg>',
+ mid:'<svg viewBox="0 0 24 24" fill="none" stroke="#d9a21b" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="8.8" cy="9.5" r=".9" fill="#d9a21b"/><circle cx="15.2" cy="9.5" r=".9" fill="#d9a21b"/><path d="M8 15.5h8"/></svg>',
+ bad:'<svg viewBox="0 0 24 24" fill="none" stroke="#e04a4a" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><circle cx="8.8" cy="9.5" r=".9" fill="#e04a4a"/><circle cx="15.2" cy="9.5" r=".9" fill="#e04a4a"/><path d="M7.5 16.5c1.2-2.4 7.8-2.4 9 0"/></svg>'};
+
+function render(m,t,showing){
+  var rows=calc(m,t), g=$('grid'), s='';
+  rows.forEach(function(r){
+    var k=r.n>=5?'good':r.n>=3?'mid':'bad';
+    s+='<div class="card '+(k==='good'?'':k)+'">'+FACE[k]+'<div class="t">'+r.time+'</div><div class="n">'+r.n+(r.n>1?' cycles':' cycle')+'</div><div class="h">'+r.dur+'</div></div>';
+  });
+  g.innerHTML=s;
+  $('head').textContent=m==='wake'?'You should go to bed at:':'You should wake up at:';
+  document.body.classList.add('res');
+  window.scrollTo(0,0);
+}
+
+function setMode(m){
+  mode=m;
+  document.body.classList.toggle('wake',m==='wake');
+  $('mBed').classList.toggle('on',m==='bed');
+  $('mWake').classList.toggle('on',m==='wake');
+}
+function setClock(min){
+  min=((min%1440)+1440)%1440;
+  var h24=Math.floor(min/60), m=min%60;
+  hh.value=String((h24%12)||12); mm.value=pad(m); ap.value=h24>=12?'PM':'AM';
+}
+function nowMin(){var d=new Date();return d.getHours()*60+d.getMinutes()}
+function selected(){return toMin(parseInt(hh.value,10),parseInt(mm.value,10),ap.value)}
+
+// build selects
+for(var h=1;h<=12;h++){var o=document.createElement('option');o.value=o.textContent=String(h);hh.appendChild(o)}
+for(var m=0;m<60;m+=5){var p=document.createElement('option');p.value=p.textContent=pad(m);mm.appendChild(p)}
+
+[0,5,10,15,20,25,30,45,60].forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v+' min';bf.appendChild(o)});
+bf.value='0';
+// stars
+var st=$('stars');
+for(var i=0;i<22;i++){var d=document.createElement('i');d.style.left=(Math.random()*100)+'%';d.style.top=(Math.random()*65)+'%';d.style.opacity=.3+Math.random()*.6;st.appendChild(d)}
+
+// events
+$('mBed').onclick=function(){setMode('bed');refresh()};
+$('mWake').onclick=function(){setMode('wake');refresh()};
+function refresh(){ if(document.body.classList.contains('res')) render(mode,selected()); }
+[hh,mm,ap].forEach(function(e){e.onchange=refresh});
+bf.onchange=function(){FALL=parseInt(bf.value,10)||0;refresh()};
+$('calc').onclick=function(){render(mode,selected())};
+function sleepNow(){
+  var t=nowMin(); setMode('bed');
+  setClock(Math.round(t/5)*5);
+  render('bed',t); // exact current time
+}
+$('now').onclick=sleepNow; $('now2').onclick=sleepNow;
+
+// default = device's current time, "go to bed at"
+setMode('bed');
+setClock(Math.round(nowMin()/5)*5);
+})();
+</script>
+</body>
+</html>
